@@ -1,0 +1,14 @@
+.nav__tab {
+   background-color: black;
+   display: flex;
+   justify-content: space-between;
+   padding: 25px 53px;
+}
+
+.nav__tab_link {
+   color: white;
+   font-weight: 500;
+   font-size: 11px;
+   line-height: 16px;
+   
+}
