@@ -8,6 +8,10 @@
    
 }
 
+.header_movies {
+   background-color: white;
+}
+
 .logo {
    width: 32px;
    height: 32px;
@@ -32,4 +36,10 @@
    color:white;
    border: 1px solid #000000;
    border-radius: 3px;
+}
+
+.heder__nav-logo{
+   width: 40px;
+   height: 43px;
+   margin: auto 0;
 }
