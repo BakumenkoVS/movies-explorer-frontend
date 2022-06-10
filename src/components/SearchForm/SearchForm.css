@@ -1,5 +1,5 @@
 .search-form {
-   padding: 60px 10px 55px;
+   padding: 60px 10px 10px;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -7,8 +7,8 @@
 
 .search-form__form {
    width: 100%;
-   min-height: 48px;
-   border: 1.5px solid #aaaaaa;
+   max-height: 48px;
+   border: 1.5px solid rgba(170, 170, 170, 0.2);
    border-radius: 50px;
    display: flex;
    justify-content: space-between;
