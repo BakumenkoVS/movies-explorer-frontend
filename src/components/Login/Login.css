@@ -1,0 +1,12 @@
+.login {
+   box-sizing: border-box;
+   padding: 38px 30px 30px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   width: 100%;
+}
+
+.inputForm__sumbit-button_login {
+   margin-top: 285px;
+}
