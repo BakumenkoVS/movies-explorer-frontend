@@ -3,22 +3,18 @@ import "./App.css";
 
 import Main from "./../Main/Main";
 import Movies from "./../Movies/Movies";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Header from './../Header/Header';
-import Footer from './../Footer/Footer';
+import { Route, Routes } from "react-router-dom";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Register from "../Register/Register";
 export default function App() {
    return (
       <div className="page">
-         <Header />
          <Routes>
-            <Route path="/" element={
-               <Main />
-            }/>
-            <Route path="/movies" element={
-               <Movies />
-            }/>
+            <Route path="/" element={<Main />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/saved-movies" element={<SavedMovies />} />
+            <Route path="/signup" element={<Register />} />
          </Routes>
-         <Footer />
       </div>
    );
 }
