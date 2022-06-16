@@ -9,6 +9,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
+import Menu from "../Menu/Menu";
 export default function App() {
    return (
       <div className="page">
@@ -20,6 +21,8 @@ export default function App() {
             <Route path="/signin" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/1" element={<Menu />} />
+            
          </Routes>
       </div>
    );

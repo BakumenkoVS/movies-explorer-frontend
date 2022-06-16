@@ -25,7 +25,8 @@
    font-weight: 400;
    font-size: 12px;
    line-height: 15px;
-   text-decoration: none;
-   color: #000;
+   border: 0;
+   background-color: white;
    margin: 284px 0 30px;
+   cursor: pointer;
 }

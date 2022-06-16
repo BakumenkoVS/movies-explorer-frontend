@@ -5,10 +5,13 @@ import { Link, Route, Routes } from "react-router-dom";
 export default function Header() {
    return (
       <header className="header">
-         <img src={logo} className="logo" alt="Логотип" />
+         <Link to="/">
+            <img src={logo} className="logo" alt="Логотип" />
+         </Link>
+
          <div className="heder__links">
-            <a className="header__link">Регистрация</a>
-            <a className="header__link header__link_button">Войти</a>
+            <Link to='/signup' className="header__link">Регистрация</Link>
+            <Link to='/signin' className="header__link header__link_button">Войти</Link>
          </div>
       </header>
    );

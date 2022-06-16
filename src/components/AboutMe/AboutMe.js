@@ -3,7 +3,7 @@ import me from "../../images/123.png";
 
 export default function AboutMe() {
    return (
-      <div className="about-me">
+      <div className="about-me" id="AboutMe">
          <h2 className="title">Студент</h2>
          <img src={me} className="about-me__img"></img>
          <h3 className="about-me__name">Владислав</h3>
