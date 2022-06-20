@@ -24,3 +24,28 @@
    line-height: 39px;
    letter-spacing: -0.04em;
 }
+
+@media screen and (min-width: 768px) {
+   .promo__logo {
+      margin: 224px auto 240px;
+      height: 320px;
+      width: 320px;
+   }
+
+   .promo__title {
+      font-size: 50px;
+      line-height: 58px;
+      top: 326px;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   .promo__logo {
+      margin: 82px auto 122px;
+   }
+
+   .promo__title {
+      margin: 0 275px;
+      top: 184px;
+   }
+}

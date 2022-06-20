@@ -1,12 +1,16 @@
 import React from "react";
 import "./Profile.css";
-import HederMovies from "../HeaderMovies/HeaderMovies";
+import HeaderMovies from "../HeaderMovies/HeaderMovies";
 import { Link } from "react-router-dom";
-export default function Profile() {
+import Menu from "../Menu/Menu";
+export default function Profile({ isOpen, onEditMenu, onClose }) {
    return (
       <>
-         <HederMovies />
+         <HeaderMovies onEditMenu={onEditMenu} />
+
          <div className="profile">
+            <Menu isOpen={isOpen} onClose={onClose} />
+
             <h2 className="signTitle">Привет, Владислав!</h2>
             <form className="profileForm">
                <div className="profile__container">

@@ -49,9 +49,7 @@
    box-sizing: border-box;
    background-color: black;
    color: white;
-   padding: 11px;
-   height: 35px;
-   width: 100%;
+   padding: 11px 0;
    font-style: normal;
    font-weight: 400;
    font-size: 11px;
@@ -66,7 +64,7 @@
 }
 
 .about-project__weeks-text {
-   margin: 10px 0;
+   margin-top: 10px;
    font-weight: 400;
    font-size: 11px;
    line-height: 13px;
@@ -74,4 +72,118 @@
    color: #a0a0a0;
 }
 
+@media screen and (min-width: 768px) {
+   .about-project {
+      padding: 90px 50px;
+   }
 
+   .title {
+      font-size: 22px;
+      line-height: 27px;
+      padding-bottom: 23px;
+   }
+
+   .about-project__container {
+      display: flex;
+      flex-direction: row;
+   }
+
+   .about-project__container_text {
+      margin-right: 30px;
+   }
+
+   .about-project__container_text:last-child {
+      margin-right: 0;
+   }
+
+   .about-project__subtitle {
+      padding-top: 70px;
+      font-size: 20px;
+      line-height: 24px;
+   }
+
+   .about-project__text {
+      font-size: 12px;
+      line-height: 18px;
+      padding-top: 22px;
+   }
+
+   .about-project__weeks {
+      margin-top: 93px;
+   }
+
+   .about-project__weeks_black {
+      width: 20.958%;
+   }
+
+   .about-project__weeks_gray {
+      width: 79.041%;
+   }
+
+   .about-project__week {
+      font-size: 14px;
+      line-height: 17px;
+      padding: 9px 0;
+   }
+
+   .about-project__weeks-text {
+      font-size: 14px;
+      line-height: 17px;
+      margin: 14px 0 0;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   .about-project {
+      padding: 110px 70px 110px;
+   }
+
+   .about-project__container {
+      display: flex;
+      flex-direction: row;
+   }
+
+   .about-project__container_text {
+      margin-right: 40px;
+   }
+
+   .about-project__container_text:last-child {
+      margin-right: 0;
+   }
+
+   .about-project__subtitle {
+      padding-top: 70px;
+      font-size: 20px;
+      line-height: 24px;
+   }
+
+   .about-project__text {
+      font-size: 14px;
+      line-height: 20px;
+      padding-top: 26px;
+   }
+
+   .about-project__weeks {
+      margin-top: 110px;
+   }
+
+   .about-project__weeks_black {
+      width: 20%;
+   }
+
+   .about-project__weeks_gray {
+      width: 80%;
+   }
+
+   .about-project__week {
+      font-size: 14px;
+      line-height: 17px;
+      padding: 9px 0;
+   }
+
+   .about-project__weeks-text {
+      font-size: 14px;
+      line-height: 17px;
+      margin: 14px 0 0;
+   }
+}

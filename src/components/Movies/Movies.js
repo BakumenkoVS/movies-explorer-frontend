@@ -6,14 +6,16 @@ import MoviesCardList from "./../MoviesCardList/MoviesCardList";
 import More from "./../More/More";
 import Footer from "../Footer/Footer";
 import Menu from "../Menu/Menu";
-export default function Movies() {
+export default function Movies({isOpen, onEditMenu, onClose}) {
    return (
       <div className="movies">
-         <HeaderMovies />
+         <HeaderMovies onEditMenu={onEditMenu}/>
          <SearchForm />
          <MoviesCardList />
          <More />
          <Footer />
+         <Menu isOpen={isOpen} onClose={onClose}/>
+
       </div>
    );
 }

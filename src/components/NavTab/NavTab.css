@@ -1,8 +1,10 @@
 .nav__tab {
+   box-sizing: border-box;
    background-color: black;
    display: flex;
-   justify-content: space-between;
-   padding: 25px 53px;
+   justify-content: center;
+   width: 100%;
+   padding: 25px 0;
 }
 
 .nav__tab_link {
@@ -10,5 +12,22 @@
    font-weight: 500;
    font-size: 11px;
    line-height: 16px;
-   
+   margin-right: 24px;
 }
+
+.nav__tab_link:last-child {
+   margin-right: 0;
+}
+
+@media screen and (min-width: 768px) {
+   .nav__tab {
+      padding: 24px 0;
+   }
+
+   .nav__tab_link {
+      margin-right: 40px;
+      font-size: 13px;
+      line-height: 16px;
+   }
+}
+

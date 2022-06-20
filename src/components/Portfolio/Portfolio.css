@@ -26,7 +26,7 @@
    line-height: 28px;
    letter-spacing: -0.04em;
    padding: 20px 0 19px;
-   border-bottom: 1px solid #E6E6E6;
+   border-bottom: 1px solid #e6e6e6;
    color: #000;
    text-decoration: none;
 }
@@ -39,4 +39,40 @@
 .portfolio__link-ikon {
    width: 18px;
    height: 28px;
+}
+
+@media screen and (min-width: 768px) {
+   .portfolio {
+      padding: 0 50px 90px;
+   }
+
+   .portfolio__title {
+      font-size: 18px;
+      line-height: 20px;
+      padding-bottom: 30px;
+   }
+
+   .portfolio__link {
+      font-size: 28px;
+      line-height: 50px;
+   }
+
+   .portfolio__link-ikon {
+      width: 28px;
+      height: 60px;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   .portfolio {
+      padding: 0 70px 125px;
+   }
+
+   .portfolio__link {
+      font-size: 30px;
+   }
+
+   .portfolio__link-ikon {
+      width: 29px;
+   }
 }
