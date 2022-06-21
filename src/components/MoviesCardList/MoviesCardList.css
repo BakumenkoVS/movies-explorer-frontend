@@ -4,4 +4,22 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   min-height: 10vh;
 }
+
+@media screen and (min-width: 768px) {
+.moviesCardList {
+   padding: 70px 0px 10px 30px;
+   flex-direction: row;
+   flex-wrap: wrap;
+}
+}
+
+@media screen and (min-width: 1280px) {
+   .moviesCardList {
+      padding: 70px 50px 10px 70px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+   }
+   }

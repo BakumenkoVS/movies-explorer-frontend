@@ -29,7 +29,7 @@ export default function Login() {
             />
             <span className="error"></span>
             <button
-               className="inputForm__sumbit-button inputForm__sumbit-button_login"
+               className="inputForm__submit-button inputForm__submit-button_login"
                type="submit"
             >
                Зарегистрироваться

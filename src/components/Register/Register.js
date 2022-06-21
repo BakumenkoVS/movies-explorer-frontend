@@ -38,7 +38,7 @@ export default function Register() {
                name="password"
             />
             <span className="error"></span>
-            <button className="inputForm__sumbit-button" type="submit">
+            <button className="inputForm__submit-button" type="submit">
                Зарегистрироваться
             </button>
             <p className="input__subtitle">

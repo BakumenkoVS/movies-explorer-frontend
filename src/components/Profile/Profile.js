@@ -6,11 +6,13 @@ import Menu from "../Menu/Menu";
 export default function Profile({ isOpen, onEditMenu, onClose }) {
    return (
       <>
-         <HeaderMovies onEditMenu={onEditMenu} />
+         <HeaderMovies
+            onEditMenu={onEditMenu}
+            isOpen={isOpen}
+            onClose={onClose}
+         />
 
          <div className="profile">
-            <Menu isOpen={isOpen} onClose={onClose} />
-
             <h2 className="signTitle">Привет, Владислав!</h2>
             <form className="profileForm">
                <div className="profile__container">

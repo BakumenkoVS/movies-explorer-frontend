@@ -29,6 +29,11 @@
    line-height: 16px;
    text-decoration: none;
    color: #000000;
+   transition: opacity linear 0.5s;
+}
+
+.header__link:hover {
+   opacity: 0.8;
 }
 
 .header__link_button {

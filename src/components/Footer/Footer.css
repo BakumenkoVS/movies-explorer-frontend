@@ -33,6 +33,11 @@
    font-size: 12px;
    line-height: 15px;
    text-align: center;
+   transition: opacity linear 0.5s;
+}
+
+.footer__link:hover {
+   opacity: 0.7;
 }
 
 .footer__year {

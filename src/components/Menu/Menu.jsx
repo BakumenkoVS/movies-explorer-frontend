@@ -19,7 +19,7 @@ export default function Menu({ isOpen, onClose }) {
                <NavLink
                   onClick={onClose}
                   to="/saved-movies"
-                  className="menu__link"
+                  className="menu__link menu__link_margin"
                >
                   Сохранённые фильмы
                </NavLink>
