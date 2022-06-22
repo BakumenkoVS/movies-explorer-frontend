@@ -10,8 +10,12 @@ export default function Header() {
          </Link>
 
          <div className="heder__links">
-            <Link to='/signup' className="header__link">Регистрация</Link>
-            <Link to='/signin' className="header__link header__link_button">Войти</Link>
+            <Link to="/signup" className="header__link">
+               Регистрация
+            </Link>
+            <Link to="/signin" className="header__link header__link_button">
+               Войти
+            </Link>
          </div>
       </header>
    );

@@ -8,7 +8,11 @@ import Footer from "../Footer/Footer";
 export default function SavedMovies({ isOpen, onEditMenu, onClose }) {
    return (
       <div className="SavedMovies">
-         <HeaderMovies onEditMenu={onEditMenu} isOpen={isOpen} onClose={onClose}/>
+         <HeaderMovies
+            onEditMenu={onEditMenu}
+            isOpen={isOpen}
+            onClose={onClose}
+         />
          <SearchForm />
          <MoviesCardList />
          <Footer />

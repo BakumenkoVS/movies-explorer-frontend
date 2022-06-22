@@ -1,7 +1,7 @@
 .more {
    box-sizing: border-box;
    width: 100%;
-   padding: 50px 10px 80px;
+   padding: 60px 10px 80px;
 }
 
 .more__button {
@@ -12,7 +12,7 @@
    line-height: 15px;
    border: 0;
    padding: 0;
-   background-color: #F9F9F9;
+   background-color: #f9f9f9;
    border-radius: 6px;
    transition: opacity linear 0.5s;
    cursor: pointer;
@@ -24,12 +24,12 @@
 
 @media screen and (min-width: 768px) {
    .more {
-      padding: 10px 30px 80px;
+      padding: 50px 30px 80px;
    }
 }
 
 @media screen and (min-width: 1280px) {
    .more {
-      padding: 10px 70px 80px;
+      padding: 50px 70px 80px;
    }
 }

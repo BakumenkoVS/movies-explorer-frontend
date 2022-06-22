@@ -10,7 +10,10 @@ export default function FilterCheckbox() {
                className="filter-checkbox__input"
                id="filter-checkbox__input"
             />
-            <label for="filter-checkbox__input" className="filter-checkbox__label"></label>
+            <label
+               for="filter-checkbox__input"
+               className="filter-checkbox__label"
+            ></label>
          </div>
       </div>
    );

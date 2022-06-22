@@ -7,7 +7,11 @@ export default function Menu({ isOpen, onClose }) {
       <div className={isOpen ? `popup__overlay open` : `popup__overlay`}>
          <nav className="menu">
             <button onClick={onClose} className="menu__close-button">
-               <img src={close} className="menu__close-button_img"></img>
+               <img
+                  src={close}
+                  className="menu__close-button_img"
+                  alt="Иконка закрытия"
+               ></img>
             </button>
             <div className="menu__links">
                <NavLink onClick={onClose} exact to="/" className="menu__link">

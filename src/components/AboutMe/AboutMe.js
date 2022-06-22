@@ -7,7 +7,7 @@ export default function AboutMe() {
          <h2 className="title">Студент</h2>
 
          <div className="about-me__container">
-            <img src={me} className="about-me__img"></img>
+            <img src={me} className="about-me__img" alt="Фото автора"></img>
 
             <div className="about-me__container_content">
                <h3 className="about-me__name">Владислав</h3>
@@ -23,12 +23,17 @@ export default function AboutMe() {
                   постоянной работы.
                </p>
                <div className="about-me__links">
-                  <a href="https://t.me/BakumenkoVS" className="about-me__link">
+                  <a
+                     href="https://t.me/BakumenkoVS"
+                     className="about-me__link"
+                     target="blank"
+                  >
                      Telegram
                   </a>
                   <a
                      href="https://github.com/BakumenkoVS"
                      className="about-me__link"
+                     target="blank"
                   >
                      Github
                   </a>

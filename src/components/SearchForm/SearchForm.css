@@ -14,17 +14,23 @@
    justify-content: space-between;
 }
 
+.search-form__form:hover {
+   border-color: #000;
+}
+
 .search-form__input {
    border: 0;
    padding: 0;
    border-radius: 50px;
-   width: 100%;
    outline: none;
+   width: 100%;
    font-weight: 400;
    font-size: 11px;
    line-height: 18px;
    margin-left: 15px;
 }
+
+
 
 .search-form__button {
    width: 34px;

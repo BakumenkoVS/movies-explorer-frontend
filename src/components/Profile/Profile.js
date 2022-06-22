@@ -2,7 +2,6 @@ import React from "react";
 import "./Profile.css";
 import HeaderMovies from "../HeaderMovies/HeaderMovies";
 import { Link } from "react-router-dom";
-import Menu from "../Menu/Menu";
 export default function Profile({ isOpen, onEditMenu, onClose }) {
    return (
       <>

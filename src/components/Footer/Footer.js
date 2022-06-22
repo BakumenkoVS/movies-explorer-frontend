@@ -8,16 +8,25 @@ export default function Footer() {
          </h2>
          <div className="footer__container">
             <div className="footer__links">
-               <a href="https://practicum.yandex.ru/" className="footer__link">
+               <a
+                  href="https://practicum.yandex.ru/"
+                  className="footer__link"
+                  target="blank"
+               >
                   Яндекс.Практикум
                </a>
                <a
                   href="https://github.com/BakumenkoVS"
                   className="footer__link"
+                  target="blank"
                >
                   Github
                </a>
-               <a href="https://t.me/BakumenkoVS" className="footer__link">
+               <a
+                  href="https://t.me/BakumenkoVS"
+                  className="footer__link"
+                  target="blank"
+               >
                   Telegram
                </a>
             </div>

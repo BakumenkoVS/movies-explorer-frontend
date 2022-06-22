@@ -1,10 +1,11 @@
 import React from "react";
-import './MoviesCardList.css'
-import MoviesCard from './../MoviesCard/MoviesCard';
-import pic1 from '../../images/pic__1.png'
+import "./MoviesCardList.css";
+import MoviesCard from "./../MoviesCard/MoviesCard";
 
 export default function MoviesCardList() {
-   return <div className="moviesCardList">
-      <MoviesCard />
-   </div>;
+   return (
+      <div className="moviesCardList">
+         <MoviesCard />
+      </div>
+   );
 }

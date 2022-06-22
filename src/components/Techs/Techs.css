@@ -1,7 +1,6 @@
 .techs {
    padding: 70px 18px;
    box-sizing: border-box;
-   background-color: #f5f5f5;
 }
 
 .techs__subtitle {
@@ -47,6 +46,7 @@
 @media screen and (min-width: 768px) {
    .techs {
       padding: 90px 50px;
+      background-color: #f5f5f5;
    }
 
    .techs__subtitle {
@@ -85,7 +85,7 @@
 
    .techs__grid {
       margin: 100px auto 0;
-      
+
       grid-template-columns: repeat(7, 1fr);
    }
 
