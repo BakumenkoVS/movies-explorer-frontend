@@ -12,9 +12,10 @@
    border-radius: 50px;
    display: flex;
    justify-content: space-between;
+   z-index: 2;
 }
 
-.search-form__form:hover {
+.search-form__form:focus-within {
    border-color: #000;
 }
 
@@ -28,6 +29,7 @@
    font-size: 11px;
    line-height: 18px;
    margin-left: 15px;
+   z-index: 1;
 }
 
 
