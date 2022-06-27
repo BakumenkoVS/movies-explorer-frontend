@@ -19,6 +19,16 @@ class Api {
          body: JSON.stringify({ name, password, email }),
       }).then(this._handleResponse);
    }
+
+   signIn(password, email) {
+      return fetch(`${this._address}/signin`, {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify({ password, email }),
+      }).then(this._handleResponse);
+   }
 }
 
 export const api = new Api({
