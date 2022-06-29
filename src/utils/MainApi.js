@@ -11,6 +11,7 @@ class Api {
    };
 
    signUp(password, email, name) {
+      debugger
       return fetch(`${this._address}/signup`, {
          method: "POST",
          headers: {
