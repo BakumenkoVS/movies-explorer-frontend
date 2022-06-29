@@ -32,7 +32,7 @@ export default function Login() {
                className="inputForm__submit-button inputForm__submit-button_login"
                type="submit"
             >
-               Зарегистрироваться
+               Войти
             </button>
             <p className="input__subtitle">
                Ещё не зарегистрированы?

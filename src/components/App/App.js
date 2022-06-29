@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import Main from "./../Main/Main";
 import Movies from "./../Movies/Movies";
 import { Route, Routes } from "react-router-dom";
@@ -10,12 +9,17 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import Menu from "../Menu/Menu";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+
 export default function App() {
+   //States
    const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   //handlers
    function handleEditMenuOpen() {
       setIsMenuOpen(true);
    }
-
    function handleEditMenuClose() {
       setIsMenuOpen(false);
    }
@@ -27,21 +31,27 @@ export default function App() {
             <Route
                path="/movies"
                element={
-                  <Movies
-                     onClose={handleEditMenuClose}
-                     isOpen={isMenuOpen}
-                     onEditMenu={handleEditMenuOpen}
-                  />
+                  <ProtectedRoute>
+                     <Movies
+                        onClose={handleEditMenuClose}
+                        isOpen={isMenuOpen}
+                        onEditMenu={handleEditMenuOpen}
+                        loggedIn={loggedIn}
+                     />
+                  </ProtectedRoute>
                }
             />
             <Route
                path="/saved-movies"
                element={
-                  <SavedMovies
-                     onClose={handleEditMenuClose}
-                     isOpen={isMenuOpen}
-                     onEditMenu={handleEditMenuOpen}
-                  />
+                  <ProtectedRoute>
+                     <SavedMovies
+                        onClose={handleEditMenuClose}
+                        isOpen={isMenuOpen}
+                        onEditMenu={handleEditMenuOpen}
+                        loggedIn={loggedIn}
+                     />
+                  </ProtectedRoute>
                }
             />
             <Route path="/signup" element={<Register />} />
@@ -49,11 +59,14 @@ export default function App() {
             <Route
                path="/profile"
                element={
-                  <Profile
-                     onClose={handleEditMenuClose}
-                     isOpen={isMenuOpen}
-                     onEditMenu={handleEditMenuOpen}
-                  />
+                  <ProtectedRoute>
+                     <Profile
+                        onClose={handleEditMenuClose}
+                        isOpen={isMenuOpen}
+                        onEditMenu={handleEditMenuOpen}
+                        loggedIn={loggedIn}
+                     />
+                  </ProtectedRoute>
                }
             />
             <Route path="*" element={<NotFound />} />
