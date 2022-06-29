@@ -49,7 +49,7 @@ export default function App() {
    }
 
    function handleLogin(password, email) {
-      debugger;
+
       return api
 
          .signIn(password, email)

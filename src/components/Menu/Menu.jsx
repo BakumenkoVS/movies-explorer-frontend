@@ -27,7 +27,7 @@ export default function Menu({ isOpen, onClose }) {
                >
                   Сохранённые фильмы
                </NavLink>
-               <Link to="/profile" className="menu__profile-link">
+               <Link to="/profile" className="menu__profile-link" onClick={onClose}>
                   Аккаунт
                </Link>
             </div>
