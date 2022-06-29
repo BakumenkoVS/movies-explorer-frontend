@@ -3,6 +3,7 @@ import "./App.css";
 import Main from "./../Main/Main";
 import Movies from "./../Movies/Movies";
 import { Route, Routes } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -15,6 +16,7 @@ export default function App() {
    //States
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [loggedIn, setLoggedIn] = useState(false);
+   const [ currentUser, setCurrentUser] = useState(null);
 
    //handlers
    function handleEditMenuOpen() {
@@ -25,6 +27,8 @@ export default function App() {
    }
 
    return (
+      <CurrentUserContext.Provider value={currentUser}>
+
       <div className="page">
          <Routes>
             <Route path="/" element={<Main />} />
@@ -73,5 +77,6 @@ export default function App() {
             <Route path="/1" element={<Menu />} />
          </Routes>
       </div>
+      </CurrentUserContext.Provider>
    );
 }
