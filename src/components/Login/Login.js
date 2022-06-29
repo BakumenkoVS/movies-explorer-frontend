@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
-export default function Login() {
+export default function Login({ handleLogin }) {
+   const [data, setData] = useState({
+      email: "",
+      password: "",
+   });
+   const { email, password } = data;
+
+   function handleChange(e) {
+      const { name, value } = e.target;
+      setData({
+         ...data,
+         [name]: value,
+      });
+   }
+
+   function handleSubmit(e) {
+      e.preventDefault();
+
+      handleLogin(password, email);
+   }
+
    return (
       <div className="login">
          <img src={logo} className="logo" alt="Логотип" />
          <h2 className="signTitle">Рады видеть!</h2>
-         <form className="inputForm">
+         <form className="inputForm" onSubmit={handleSubmit}>
             <p className="input__title">E-mail</p>
             <input
                className="inputForm__input"
@@ -16,6 +36,8 @@ export default function Login() {
                maxLength="40"
                name="email"
                type="email"
+               value={email}
+               onChange={handleChange}
             />
             <span className="error"></span>
             <p className="input__title">Пароль</p>
@@ -26,6 +48,8 @@ export default function Login() {
                maxLength="40"
                type="password"
                name="password"
+               value={password}
+               onChange={handleChange}
             />
             <span className="error"></span>
             <button

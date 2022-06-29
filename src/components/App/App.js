@@ -40,6 +40,21 @@ export default function App() {
          });
    }
 
+   function handleLogin(password, email) {
+      return api
+         .signIn(password, email)
+         .then((data) => {
+            if (data.token) {
+               localStorage.setItem("jwt", data.token);
+               setLoggedIn(true);
+               history("/movies");
+            }
+         })
+         .catch((err) => {
+            console.log(err);
+         });
+   }
+
    return (
       <CurrentUserContext.Provider value={currentUser}>
          <div className="page">
@@ -75,7 +90,10 @@ export default function App() {
                   path="/signup"
                   element={<Register handleRegister={handleRegister} />}
                />
-               <Route path="/signin" element={<Login />} />
+               <Route
+                  path="/signin"
+                  element={<Login handleLogin={handleLogin} />}
+               />
                <Route
                   path="/profile"
                   element={
@@ -90,7 +108,6 @@ export default function App() {
                   }
                />
                <Route path="*" element={<NotFound history={history} />} />
-               <Route path="/1" element={<Menu />} />
             </Routes>
          </div>
       </CurrentUserContext.Provider>
