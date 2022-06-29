@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Main from "./../Main/Main";
 import Movies from "./../Movies/Movies";
@@ -9,7 +9,6 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
-import Menu from "../Menu/Menu";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { api } from "../../utils/MainApi";
 
@@ -20,6 +19,16 @@ export default function App() {
    const [currentUser, setCurrentUser] = useState(null);
    const history = useNavigate();
 
+   useEffect(() => {
+      tokenCheck();
+   }, []);
+
+   useEffect(() => {
+      if (loggedIn) {
+         history("/movies");
+      }
+   }, [loggedIn]);
+
    //handlers
    function handleEditMenuOpen() {
       setIsMenuOpen(true);
@@ -29,7 +38,6 @@ export default function App() {
    }
 
    function handleRegister(password, email, name) {
-      debugger;
       return api
          .signUp(password, email, name)
          .then((res) => {
@@ -41,7 +49,9 @@ export default function App() {
    }
 
    function handleLogin(password, email) {
+      debugger;
       return api
+
          .signIn(password, email)
          .then((data) => {
             if (data.token) {
@@ -54,6 +64,35 @@ export default function App() {
             console.log(err);
          });
    }
+
+   function signOut() {
+      localStorage.removeItem("jwt");
+      setLoggedIn(false);
+   }
+
+   function tokenCheck() {
+      let jwt = localStorage.getItem("jwt");
+      if (jwt) {
+         api.getContent().then((res) => {
+            debugger;
+            if (res) {
+               setCurrentUser(res.data);
+               setLoggedIn(true);
+            }
+         });
+      }
+   }
+
+   useEffect(() => {
+      if (loggedIn) {
+         Promise.all([api.getContent()])
+
+            .then(([user]) => {
+               setCurrentUser(user.data);
+            })
+            .catch((err) => console.log(err));
+      }
+   }, [loggedIn]);
 
    return (
       <CurrentUserContext.Provider value={currentUser}>
@@ -103,6 +142,7 @@ export default function App() {
                            isOpen={isMenuOpen}
                            onEditMenu={handleEditMenuOpen}
                            loggedIn={loggedIn}
+                           signOut={signOut}
                         />
                      </ProtectedRoute>
                   }

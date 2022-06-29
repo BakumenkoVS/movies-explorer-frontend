@@ -11,7 +11,6 @@ class Api {
    };
 
    signUp(password, email, name) {
-      debugger
       return fetch(`${this._address}/signup`, {
          method: "POST",
          headers: {
@@ -30,6 +29,16 @@ class Api {
          body: JSON.stringify({ password, email }),
       }).then(this._handleResponse);
    }
+
+   getContent = () => {
+      return fetch(`${this._address}/users/me`, {
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this._token}`,
+         },
+      }).then(this._handleResponse);
+   };
 }
 
 export const api = new Api({

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Profile.css";
 import HeaderMovies from "../HeaderMovies/HeaderMovies";
 import { Link } from "react-router-dom";
-export default function Profile({ isOpen, onEditMenu, onClose }) {
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+
+export default function Profile({ isOpen, onEditMenu, onClose, signOut }) {
+   const currentUser = useContext(CurrentUserContext);
+
    return (
       <>
          <HeaderMovies
@@ -12,7 +16,7 @@ export default function Profile({ isOpen, onEditMenu, onClose }) {
          />
 
          <div className="profile">
-            <h2 className="signTitle">Привет, Владислав!</h2>
+            <h2 className="signTitle">Привет, {currentUser?.name}!</h2>
             <form className="profileForm">
                <div className="profile__container">
                   <input
@@ -24,7 +28,7 @@ export default function Profile({ isOpen, onEditMenu, onClose }) {
                      type="name"
                      placeholder="Имя"
                   />
-                  <p className="profile__name">Владислав</p>
+                  <p className="profile__name">{currentUser?.name}</p>
                </div>
                <div className="profile__container">
                   <input
@@ -37,7 +41,7 @@ export default function Profile({ isOpen, onEditMenu, onClose }) {
                      placeholder="E-mail"
                   />
                   <p className="profile__name profile__name_email">
-                     pochta@yande.ru
+                     {currentUser?.email}
                   </p>
                </div>
 
@@ -45,7 +49,7 @@ export default function Profile({ isOpen, onEditMenu, onClose }) {
                   Редактировать
                </button>
 
-               <Link className="profile__link" to="/signup">
+               <Link className="profile__link" to="/signup" onClick={signOut}>
                   Выйти из аккаунта
                </Link>
             </form>
