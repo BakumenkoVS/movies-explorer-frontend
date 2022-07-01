@@ -48,6 +48,16 @@ export default function App() {
          });
    }
 
+   const handleUpdateUser = (name, email) => {
+      debugger
+      api.addUserInfo(name, email)
+         .then((res) => {
+            setCurrentUser(res);
+            debugger
+         })
+         .catch((err) => console.log(err));
+   };
+
    function handleLogin(password, email) {
 
       return api
@@ -143,6 +153,7 @@ export default function App() {
                            onEditMenu={handleEditMenuOpen}
                            loggedIn={loggedIn}
                            signOut={signOut}
+                           handleUpdateUser={handleUpdateUser}
                         />
                      </ProtectedRoute>
                   }
