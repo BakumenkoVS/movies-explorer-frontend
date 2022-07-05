@@ -41,14 +41,13 @@ class Api {
    };
 
    addUserInfo(name, email) {
-      debugger
       return fetch(`${this._address}/users/me`, {
          method: "PATCH",
          headers: {
             authorization: `Bearer ${localStorage.getItem("jwt")}`,
             "Content-type": "application/json",
          },
-         body: JSON.stringify({name, email}),
+         body: JSON.stringify({ name, email }),
       }).then(this._handleResponse);
    }
 }

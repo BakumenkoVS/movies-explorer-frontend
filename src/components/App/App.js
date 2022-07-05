@@ -11,12 +11,14 @@ import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { api } from "../../utils/MainApi";
+import { moviesApi } from "../../utils/MoviesApi";
 
 export default function App() {
    //States
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [loggedIn, setLoggedIn] = useState(false);
    const [currentUser, setCurrentUser] = useState(null);
+   const [movies, setMovies] = useState(null);
    const history = useNavigate();
 
    useEffect(() => {
@@ -49,17 +51,14 @@ export default function App() {
    }
 
    const handleUpdateUser = (name, email) => {
-      debugger
       api.addUserInfo(name, email)
          .then((res) => {
             setCurrentUser(res);
-            debugger
          })
          .catch((err) => console.log(err));
    };
 
    function handleLogin(password, email) {
-
       return api
 
          .signIn(password, email)
@@ -84,7 +83,6 @@ export default function App() {
       let jwt = localStorage.getItem("jwt");
       if (jwt) {
          api.getContent().then((res) => {
-            debugger;
             if (res) {
                setCurrentUser(res.data);
                setLoggedIn(true);
@@ -95,10 +93,11 @@ export default function App() {
 
    useEffect(() => {
       if (loggedIn) {
-         Promise.all([api.getContent()])
+         Promise.all([api.getContent(), moviesApi.getMovies()])
 
-            .then(([user]) => {
+            .then(([user, movies]) => {
                setCurrentUser(user.data);
+               setMovies(movies);
             })
             .catch((err) => console.log(err));
       }
@@ -118,6 +117,7 @@ export default function App() {
                            isOpen={isMenuOpen}
                            onEditMenu={handleEditMenuOpen}
                            loggedIn={loggedIn}
+                           onMovies={movies}
                         />
                      </ProtectedRoute>
                   }

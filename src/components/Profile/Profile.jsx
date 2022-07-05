@@ -30,7 +30,6 @@ export default function Profile({
 
    function handleSubmit(e) {
       e.preventDefault();
-      debugger;
       handleUpdateUser(name, email);
    }
 
