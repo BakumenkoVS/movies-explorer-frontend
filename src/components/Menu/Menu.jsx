@@ -14,7 +14,7 @@ export default function Menu({ isOpen, onClose }) {
                ></img>
             </button>
             <div className="menu__links">
-               <NavLink onClick={onClose} exact to="/" className="menu__link">
+               <NavLink onClick={onClose} to="/" className="menu__link">
                   Главная
                </NavLink>
                <NavLink onClick={onClose} to="/movies" className="menu__link">
