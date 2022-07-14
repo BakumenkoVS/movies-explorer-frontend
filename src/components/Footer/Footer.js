@@ -31,7 +31,7 @@ export default function Footer() {
                </a>
             </div>
 
-            <p className="footer__year">&copy;2020</p>
+            <p className="footer__year">&copy;2022</p>
          </div>
       </div>
    );
