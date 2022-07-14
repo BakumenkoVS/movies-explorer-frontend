@@ -4,7 +4,6 @@ import iconButton from "../../images/button_icon.svg";
 import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 import { useLocation } from "react-router-dom";
 export default function SearchForm({
-   setData,
    setShortcut,
    shortcut,
    foundFilms,
