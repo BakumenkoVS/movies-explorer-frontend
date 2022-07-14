@@ -50,6 +50,14 @@ class Api {
          body: JSON.stringify({ name, email }),
       }).then(this._handleResponse);
    }
+
+   getSavedMovies() {
+      return fetch(`${this._address}/movies`, {
+         headers: {
+            authorization: `Bearer ${localStorage.getItem("jwt")}`,
+         },
+      }).then(this._handleResponse);
+   }
 }
 
 export const api = new Api({
