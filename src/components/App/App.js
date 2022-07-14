@@ -139,6 +139,7 @@ export default function App() {
       localStorage.setItem("foundFilms", JSON.stringify(newFilterMovies));
       localStorage.setItem("inputInfo", JSON.stringify(inputInfo));
       localStorage.setItem("shortcut", JSON.stringify(shortcut));
+      localStorage.setItem("count", JSON.stringify(0));
    };
 
    //Фильтрация массива сохраненных фильмов
@@ -211,6 +212,7 @@ export default function App() {
                            setShortcut={setShortcutSave}
                            shortcut={shortcutSave}
                            foundFilms={foundSavedFilms}
+                           onMovies={moviesSaved}
                         />
                      </ProtectedRoute>
                   }
