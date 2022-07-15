@@ -4,6 +4,10 @@
    padding: 60px 10px 80px;
 }
 
+.more__disable {
+   display: none;
+}
+
 .more__button {
    width: 100%;
    min-height: 36px;
