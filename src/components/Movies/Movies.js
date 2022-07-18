@@ -7,6 +7,7 @@ import More from "./../More/More";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useCallback } from "react";
+import Preloader from "../Preloader/Preloader";
 export default function Movies({
    isOpen,
    onEditMenu,
@@ -15,74 +16,48 @@ export default function Movies({
    setShortcut,
    shortcut,
    foundFilms,
+   moviesSaved,
+   addNewMovie,
+   loading,
+   error,
 }) {
-      
-   const [count, setCount] = useState(JSON.parse(localStorage.getItem("count")) || 0);
-
-   // const [x, setX] = useState([]);
-   // const results = () => {
-   //    if (onMovies && data) {
-   //       return onMovies.filter((item) => {
-   //          return shortcut
-   //             ? item.nameRU.toLowerCase().includes(`${data.toLowerCase()}`) &&
-   //                  item.duration < 40
-   //             : item.nameRU.toLowerCase().includes(`${data.toLowerCase()}`);
-   //       });
-   //    }
-   // };
-
-   // const zz = results();
-
-   // if (false) {
-   //    debugger;
-   //    localStorage.setItem("movies", JSON.stringify(filterList));
-   // }
-
-   // useEffect(() => {
-   //    const results = () => {
-   //       if (onMovies && data) {
-   //          return onMovies.filter((item) => {
-   //             return shortcut
-   //                ? item.nameRU
-   //                     .toLowerCase()
-   //                     .includes(`${data.toLowerCase()}`) && item.duration < 40
-   //                : item.nameRU.toLowerCase().includes(`${data.toLowerCase()}`);
-   //          });
-   //       }
-   //    };
-   // }, [data, shortcut]);
+   const [count, setCount] = useState(
+      JSON.parse(localStorage.getItem("count")) || 0
+   );
 
    useEffect(() => {
       handlePaginationCount();
    }, [window.innerWidth]);
 
-
-
-   const timeout = useCallback(() => {
+   const timeoutResize = useCallback(() => {
       const timer = setTimeout(() => {
          handlePaginationCount();
       }, 2000);
       return () => {
-        clearTimeout(timer);
+         clearTimeout(timer);
       };
-    }, []);
-  
-    useEffect(() => {
-      window.addEventListener("resize", timeout);
-      return () => {
-        window.removeEventListener("resize", () => timeout);
-      };
-    }, [timeout]);
+   }, []);
 
+   useEffect(() => {
+      window.addEventListener("resize", timeoutResize);
+      return () => {
+         window.removeEventListener("resize", () => timeoutResize);
+      };
+   }, [timeoutResize]);
 
    const item = () => {
       if (onMovies) {
          return onMovies
             .map((movie) => (
-               <MoviesCard movie={movie} key={`movie${movie.id}`} />
+               <MoviesCard
+                  movie={movie}
+                  key={`movie${movie.id}`}
+                  moviesSaved={moviesSaved}
+                  addNewMovie={addNewMovie}
+               />
             ))
             .slice(0, count);
-            console.log(count)
+         console.log(count);
       }
    };
 
@@ -93,6 +68,9 @@ export default function Movies({
          }
          if (window.innerWidth >= 768) {
             setCount(4);
+         }
+         if (window.innerWidth >= 1037) {
+            setCount(6);
          }
          if (window.innerWidth >= 1280) {
             setCount(4);
@@ -108,6 +86,9 @@ export default function Movies({
       }
       if (window.innerWidth >= 768) {
          setCount(count + 4);
+      }
+      if (window.innerWidth >= 1037) {
+         setCount(count + 6);
       }
       if (window.innerWidth >= 1280) {
          setCount(count + 4);
@@ -126,8 +107,15 @@ export default function Movies({
             shortcut={shortcut}
             foundFilms={foundFilms}
          />
-         <MoviesCardList onMovies={item()} />
-         <More onClick={handleClick}/>
+         <MoviesCardList
+            onMovies={loading ? <Preloader /> : item()}
+            error={error}
+         />
+         <More
+            onClick={handleClick}
+            onMoviesSlice={item()}
+            onMovies={onMovies}
+         />
          <Footer />
       </div>
    );

@@ -1,30 +1,22 @@
 import React from "react";
 import "./MoviesCardList.css";
 
-export default function MoviesCardList({ onMovies }) {
-   //const [item, setItem] = useState([])
-   // const item = () => {
-   //    if (onMovies) {
-   //       return onMovies.map((movie) => (
-   //          <MoviesCard movie={movie} key={`movie${movie.id}`} />
-   //       )).slice(0);
-   //    }
-   // };
+export default function MoviesCardList({ onMovies, error }) {
+   const renderList = () => {
+      if (error) {
+         return (
+            <p className="MoviesCardList__message">
+               Во время запроса произошла ошибка. Возможно, проблема с
+               соединением или сервер недоступен. Подождите немного и попробуйте
+               ещё раз
+            </p>
+         );
+      } else if (onMovies.length === 0) {
+         return <p className="MoviesCardList__message">Ничего не найдено</p>;
+      } else {
+         return onMovies;
+      }
+   };
 
-   // useEffect(() => {
-   //    const item = () => {
-   //       if (localStorage.getItem("movies") !== "undefined") {
-   //          console.log(2);
-
-   //          return JSON.parse(localStorage.getItem("movies")).map((movie) => (
-   //             <MoviesCard movie={movie} key={`movie${movie.id}`} />
-   //          ));
-   //       }
-   //    };
-   //    setItem(item())
-   // }, [data]);
-
-   // const itemList = item();
-
-   return <div className="moviesCardList">{onMovies}</div>;
+   return <div className="moviesCardList">{renderList()}</div>;
 }

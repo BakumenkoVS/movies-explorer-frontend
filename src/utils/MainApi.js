@@ -58,6 +58,30 @@ class Api {
          },
       }).then(this._handleResponse);
    }
+
+   addSavedMovies(data) {
+      debugger
+      return fetch(`${this._address}/movies`, {
+         method: "POST",
+         headers: {
+            authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-type": "application/json",
+         },
+         body: JSON.stringify({
+            country: data.country,
+            director: data.director,
+            duration: data.duration,
+            year: data.year,
+            description: data.description,
+            image: `https://api.nomoreparties.co/${data.image.url}`,
+            trailerLink: data.trailerLink,
+            thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
+            movieId: data.id,
+            nameRU: data.nameRU,
+            nameEN: data.nameEN,
+         }),
+      }).then(this._handleResponse);
+   }
 }
 
 export const api = new Api({

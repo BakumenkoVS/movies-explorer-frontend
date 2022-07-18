@@ -23,7 +23,9 @@ export default function App() {
    const [shortcut, setShortcut] = useState(false);
    const [shortcutSave, setShortcutSave] = useState(false);
    const [searchMovies, setSearchMovies] = useState([]);
-   const [searchSavedMovies, setSearchSavedMovies] = useState([]);
+   const [searchSavedMovies, setSearchSavedMovies] = useState(null);
+   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState("");
 
    const history = useNavigate();
 
@@ -102,6 +104,34 @@ export default function App() {
       setLoggedIn(false);
    }
 
+   //Обращение к api для получения информации о пользователе  массива фильмов
+   //а так же сохраненных фильмов
+   useEffect(() => {
+      setLoading(true);
+      if (loggedIn) {
+         Promise.all([
+            api.getContent(),
+            moviesApi.getMovies(),
+            api.getSavedMovies(),
+         ])
+            .then(([user, movies, moviesSaved]) => {
+               setCurrentUser(user.data);
+               setMovies(movies);
+               const userMovies = moviesSaved.filter(
+                  (movie) => movie.owner === currentUser._id
+               );
+               setMoviesSaved(userMovies);
+               localStorage.setItem("moviesSave", JSON.stringify(userMovies));
+               localStorage.setItem("movies", JSON.stringify(movies));
+               setLoading(false);
+            })
+            .catch((err) => {
+               setError(err);
+               console.log(`Ошибка загрузки данных ${err}`);
+            });
+      }
+   }, [loggedIn]);
+
    //функция проверяет наличия токена в локальном хранилище и если он есть
    //разрешает вход без авторизации
    function tokenCheck() {
@@ -118,6 +148,7 @@ export default function App() {
 
    //Функция фильтрует исходный массив фильмов
    //по продолжительности и ключевому набору букв
+
    function filterMovies(moviesData, inputInfo, duration) {
       return moviesData.filter((item) => {
          return duration
@@ -131,7 +162,7 @@ export default function App() {
    //функция получает inputInfo из формы поиска и фильтрует массив всех фильмов
    //по ключевому слову и продолжительности так же записывает результаты в локальное хранилище
    const foundFilms = (inputInfo) => {
-      debugger;
+      setLoading(true);
       const newFilterMovies = filterMovies(movies, inputInfo, shortcut);
       console.log(1);
       console.log(newFilterMovies);
@@ -140,49 +171,52 @@ export default function App() {
       localStorage.setItem("inputInfo", JSON.stringify(inputInfo));
       localStorage.setItem("shortcut", JSON.stringify(shortcut));
       localStorage.setItem("count", JSON.stringify(0));
+      setTimeout(() => {
+         setLoading(false);
+      }, 1500);
    };
 
    //Фильтрация массива сохраненных фильмов
    const foundSavedFilms = (inputInfo) => {
-      debugger;
+      setLoading(true);
       const newFilterMovies = filterMovies(
          moviesSaved,
          inputInfo,
          shortcutSave
       );
-      console.log(2);
-      console.log(newFilterMovies);
       setSearchSavedMovies(newFilterMovies);
+      setTimeout(() => {
+         setLoading(false);
+      }, 1500);
    };
 
-   //Обращение к api для получения информации о пользователе  массива фильмов
-   //а так же сохраненных фильмов
-   useEffect(() => {
-      if (loggedIn) {
-         Promise.all([
-            api.getContent(),
-            moviesApi.getMovies(),
-            api.getSavedMovies(),
-         ])
-            .then(([user, movies, moviesSaved]) => {
-               setCurrentUser(user.data);
-               setMovies(movies);
-               const userMovies = moviesSaved.filter(
-                  (movie) => movie.owner === currentUser._id
-               );
-               setMoviesSaved(userMovies);
-               localStorage.setItem("moviesSave", JSON.stringify(userMovies));
-               localStorage.setItem("movies", JSON.stringify(movies));
-            })
-            .catch((err) => console.log(err));
-      }
-   }, [loggedIn]);
+   const addNewSaveMovie = (movie) => {
+      api.addSavedMovies(movie)
+         .then((data) => {
+            setMoviesSaved([...moviesSaved, data]);
+            localStorage.setItem(
+               "moviesSave",
+               JSON.stringify([...moviesSaved, data])
+            );
+         })
+         .catch((err) => console.log(err));
+   };
 
    return (
       <CurrentUserContext.Provider value={currentUser}>
          <div className="page">
             <Routes>
-               <Route path="/" element={<Main />} />
+               <Route
+                  path="/"
+                  element={
+                     <Main
+                        loggedIn={loggedIn}
+                        onClose={handleEditMenuClose}
+                        isOpen={isMenuOpen}
+                        onEditMenu={handleEditMenuOpen}
+                     />
+                  }
+               />
                <Route
                   path="/movies"
                   element={
@@ -196,6 +230,10 @@ export default function App() {
                            setShortcut={setShortcut}
                            shortcut={shortcut}
                            foundFilms={foundFilms}
+                           moviesSaved={moviesSaved}
+                           addNewMovie={addNewSaveMovie}
+                           loading={loading}
+                           error={error}
                         />
                      </ProtectedRoute>
                   }
@@ -213,6 +251,9 @@ export default function App() {
                            shortcut={shortcutSave}
                            foundFilms={foundSavedFilms}
                            onMovies={moviesSaved}
+                           searchSavedMovies={searchSavedMovies}
+                           loading={loading}
+                           error={error}
                         />
                      </ProtectedRoute>
                   }

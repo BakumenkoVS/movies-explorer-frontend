@@ -5,6 +5,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import HeaderMovies from "../HeaderMovies/HeaderMovies";
 import Footer from "../Footer/Footer";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 
 export default function SavedMovies({
    isOpen,
@@ -13,17 +14,29 @@ export default function SavedMovies({
    setShortcut,
    shortcut,
    foundFilms,
-   onMovies
+   onMovies,
+   searchSavedMovies,
+   loading,
+   error,
 }) {
+   const item = (data) => {
+      return data.map((movie) => (
+         <MoviesCard
+            movie={movie}
+            key={`movie${movie.id}`}
+            moviesSaved={data}
+         />
+      ));
+   };
 
-   const item = () => {
-      if (onMovies) {
-         return onMovies
-            .map((movie) => (
-               <MoviesCard movie={movie} key={`movie${movie.id}`} />
-            ))
+   const render = () => {
+      if (searchSavedMovies) {
+         return item(searchSavedMovies);
+      } else {
+         return item(onMovies);
       }
    };
+
    return (
       <div className="SavedMovies">
          <HeaderMovies
@@ -36,7 +49,10 @@ export default function SavedMovies({
             shortcut={shortcut}
             foundFilms={foundFilms}
          />
-         <MoviesCardList onMovies={item()}/>
+         <MoviesCardList
+            onMovies={loading ? <Preloader /> : render()}
+            error={error}
+         />
          <Footer />
       </div>
    );

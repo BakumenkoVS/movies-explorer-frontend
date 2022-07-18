@@ -2,22 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./More.css";
 export default function More({ onClick, onMoviesSlice, onMovies }) {
    const [full, setFull] = useState(false);
-console.log(onMovies.length)
-console.log(onMoviesSlice.length)
+   console.log(onMovies.length);
+   console.log(onMoviesSlice.length);
 
-useEffect(()=>{
-   if(onMovies.length == onMoviesSlice.length ) {
-      debugger
-      setFull(true)
-   } else {
-      setFull(false)
-   }
-},[onMoviesSlice])
-   
+   useEffect(() => {
+      if (onMovies.length == onMoviesSlice.length) {
+         setFull(true);
+      } else {
+         setFull(false);
+      }
+   }, [onMoviesSlice]);
 
-   const MoreClassName = `${
-      full ? "more__disable" : "more"
-   }`;
+   const MoreClassName = `${full ? "more__disable" : "more"}`;
 
    return (
       <div className={MoreClassName}>
