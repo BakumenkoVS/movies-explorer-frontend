@@ -4,7 +4,7 @@
    display: grid;
    grid-template-columns: repeat(auto-fit, 300px);
    justify-content: center;
-   min-height: 10vh;
+   min-height: 50vh;
    grid-row-gap: 34px;
    max-width: 100%;
 }

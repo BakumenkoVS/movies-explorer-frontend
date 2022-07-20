@@ -25,6 +25,8 @@
    right: 0;
 }
 
+
+
 .open {
    display: block;
 }
@@ -104,11 +106,19 @@
       background-color: white;
    }
 
+   .popup__overlay_pink {
+      background-color: #f3c1f8;
+   }
+
    .menu {
       display: block;
       width: 1100px;
       position: relative;
       z-index: 2;
+   }
+
+   .menu_pink {
+      background-color: #f3c1f8;
    }
 
    .menu__close-button {

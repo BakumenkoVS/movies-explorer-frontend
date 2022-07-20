@@ -1,11 +1,17 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import "./Menu.css";
 import close from "../../images/close_icon.svg";
 export default function Menu({ isOpen, onClose }) {
+   const location = useLocation();
+   const popupClass = `${
+      location.pathname === "/"
+         ? "popup__overlay popup__overlay_pink"
+         : "popup__overlay"
+   }`;
    return (
-      <div className={isOpen ? `popup__overlay open` : `popup__overlay`}>
-         <nav className="menu">
+      <div className={isOpen ? "popup__overlay open" : popupClass}>
+         <nav className={location.pathname === "/" ? "menu menu_pink" : "menu"}>
             <button onClick={onClose} className="menu__close-button">
                <img
                   src={close}
@@ -27,7 +33,11 @@ export default function Menu({ isOpen, onClose }) {
                >
                   Сохранённые фильмы
                </NavLink>
-               <Link to="/profile" className="menu__profile-link" onClick={onClose}>
+               <Link
+                  to="/profile"
+                  className="menu__profile-link"
+                  onClick={onClose}
+               >
                   Аккаунт
                </Link>
             </div>

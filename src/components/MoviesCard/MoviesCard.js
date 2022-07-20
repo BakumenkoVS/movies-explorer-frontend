@@ -1,9 +1,13 @@
 import React from "react";
 import "./MoviesCard.css";
-import { Link, useLocation } from "react-router-dom";
-export default function MoviesCard({ movie, moviesSaved, addNewMovie }) {
+import { useLocation } from "react-router-dom";
+export default function MoviesCard({
+   movie,
+   moviesSaved,
+   addNewMovie,
+   deleteMovie,
+}) {
    const location = useLocation();
-   
 
    function getTimeFromMins(time) {
       if (time) {
@@ -14,10 +18,17 @@ export default function MoviesCard({ movie, moviesSaved, addNewMovie }) {
       return;
    }
 
-   const handleNewMovie = (e) => {
-      debugger;
+   const handleMovieClick = (e) => {
       e.preventDefault();
-      addNewMovie(movie);
+      if (isLiked) {
+         deleteMovie(movie.id);
+      } else {
+         addNewMovie(movie);
+      }
+   };
+
+   const handleMovieClickDelete = (e) => {
+      deleteMovie(movie.movieId);
    };
 
    const isLiked = moviesSaved.some((item) => {
@@ -53,11 +64,14 @@ export default function MoviesCard({ movie, moviesSaved, addNewMovie }) {
                            ? "moviesCard__like moviesCard__like_active"
                            : "moviesCard__like"
                      }
-                     onClick={handleNewMovie}
+                     onClick={handleMovieClick}
                   ></button>
                )}
                {location.pathname === "/saved-movies" && (
-                  <button className="moviesCard__like moviesCard__delete"></button>
+                  <button
+                     onClick={handleMovieClickDelete}
+                     className="moviesCard__like moviesCard__delete"
+                  ></button>
                )}
             </div>
 

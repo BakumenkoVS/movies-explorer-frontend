@@ -18,6 +18,7 @@ export default function SavedMovies({
    searchSavedMovies,
    loading,
    error,
+   deleteMovie,
 }) {
    const item = (data) => {
       return data.map((movie) => (
@@ -25,6 +26,7 @@ export default function SavedMovies({
             movie={movie}
             key={`movie${movie.id}`}
             moviesSaved={data}
+            deleteMovie={deleteMovie}
          />
       ));
    };

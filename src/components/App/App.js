@@ -12,12 +12,13 @@ import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 export default function App() {
    //States
    const [isMenuOpen, setIsMenuOpen] = useState(false);
    const [loggedIn, setLoggedIn] = useState(false);
-   const [currentUser, setCurrentUser] = useState(null);
+   const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
    const [movies, setMovies] = useState(null);
    const [moviesSaved, setMoviesSaved] = useState(null);
    const [shortcut, setShortcut] = useState(false);
@@ -26,6 +27,8 @@ export default function App() {
    const [searchSavedMovies, setSearchSavedMovies] = useState(null);
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState("");
+   const [infoTooltip, setInfoTooltip] = useState(false);
+   const [infoTooltipInfo, setInfoTooltipInfo] = useState({});
 
    const history = useNavigate();
 
@@ -44,7 +47,7 @@ export default function App() {
    useEffect(() => {
       setShortcut(JSON.parse(localStorage.getItem("shortcut")));
       setSearchMovies(JSON.parse(localStorage.getItem("foundFilms")));
-      setMoviesSaved(JSON.parse(localStorage.getItem("moviesSave")));
+      //setMoviesSaved(JSON.parse(localStorage.getItem("moviesSave")));
    }, []);
 
    //handlers
@@ -64,9 +67,20 @@ export default function App() {
       return api
          .signUp(password, email, name)
          .then((res) => {
+            debugger;
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Вы успешно зарегистрировались!",
+               class: "success",
+            });
             history("/signin");
          })
          .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка регистрации",
+               class: "error",
+            });
             console.log(err);
          });
    }
@@ -98,29 +112,50 @@ export default function App() {
          });
    }
 
+   const handleCloseInfoTooltip = () => {
+      setInfoTooltip(false);
+   };
+
    //Функция выхода из профиля
    function signOut() {
-      localStorage.removeItem("jwt");
+      localStorage.clear();
       setLoggedIn(false);
+      setIsMenuOpen(false);
+      setCurrentUser({ name: "", email: "" });
+      setMovies(null);
+      setMoviesSaved(null);
+      setShortcut(false);
+      setShortcutSave(false);
+      setSearchMovies([]);
+      setSearchSavedMovies(null);
+      setError("");
    }
+
+   useEffect(() => {
+      if (loading) {
+         api.getContent()
+            .then((user) => {
+               setCurrentUser(user.data);
+            })
+            .catch((err) => {
+               setError(err);
+               console.log(`Ошибка загрузки данных пользователя ${err}`);
+            });
+      }
+   }, [loggedIn]);
 
    //Обращение к api для получения информации о пользователе  массива фильмов
    //а так же сохраненных фильмов
    useEffect(() => {
       setLoading(true);
       if (loggedIn) {
-         Promise.all([
-            api.getContent(),
-            moviesApi.getMovies(),
-            api.getSavedMovies(),
-         ])
-            .then(([user, movies, moviesSaved]) => {
-               setCurrentUser(user.data);
+         Promise.all([moviesApi.getMovies(), api.getSavedMovies()])
+            .then(([movies, moviesSaved]) => {
                setMovies(movies);
                const userMovies = moviesSaved.filter(
                   (movie) => movie.owner === currentUser._id
                );
-               setMoviesSaved(userMovies);
+               setMoviesSaved(userMovies || []);
                localStorage.setItem("moviesSave", JSON.stringify(userMovies));
                localStorage.setItem("movies", JSON.stringify(movies));
                setLoading(false);
@@ -130,7 +165,7 @@ export default function App() {
                console.log(`Ошибка загрузки данных ${err}`);
             });
       }
-   }, [loggedIn]);
+   }, [currentUser]);
 
    //функция проверяет наличия токена в локальном хранилище и если он есть
    //разрешает вход без авторизации
@@ -193,13 +228,51 @@ export default function App() {
    const addNewSaveMovie = (movie) => {
       api.addSavedMovies(movie)
          .then((data) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Фильм сохранен!",
+               class: "success",
+            });
             setMoviesSaved([...moviesSaved, data]);
             localStorage.setItem(
                "moviesSave",
                JSON.stringify([...moviesSaved, data])
             );
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка при сохранении фильма",
+               class: "error",
+            });
+            console.log(err);
+         });
+   };
+
+   const deleteMovie = (id) => {
+      const movieDelete = moviesSaved.find((m) => m.movieId === id);
+
+      api.deleteMovie(movieDelete._id).then(() => {
+         setInfoTooltip(true);
+         setInfoTooltipInfo({
+            text: "Фильм успешно удален!",
+            class: "success",
+         });
+         setMoviesSaved(moviesSaved.filter((m) => m._id !== movieDelete._id));
+      });
+      setSearchSavedMovies(
+         moviesSaved.filter((m) => m._id !== movieDelete._id)
+      );
+      localStorage
+         .setItem("moviesSave", JSON.stringify(moviesSaved))
+         .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка при удалении фильма",
+               class: "error",
+            });
+            console.log(err);
+         });
    };
 
    return (
@@ -234,6 +307,7 @@ export default function App() {
                            addNewMovie={addNewSaveMovie}
                            loading={loading}
                            error={error}
+                           deleteMovie={deleteMovie}
                         />
                      </ProtectedRoute>
                   }
@@ -254,6 +328,7 @@ export default function App() {
                            searchSavedMovies={searchSavedMovies}
                            loading={loading}
                            error={error}
+                           deleteMovie={deleteMovie}
                         />
                      </ProtectedRoute>
                   }
@@ -283,6 +358,11 @@ export default function App() {
                />
                <Route path="*" element={<NotFound history={history} />} />
             </Routes>
+            <InfoTooltip
+               onClose={handleCloseInfoTooltip}
+               isOpen={infoTooltip}
+               props={infoTooltipInfo}
+            />
          </div>
       </CurrentUserContext.Provider>
    );

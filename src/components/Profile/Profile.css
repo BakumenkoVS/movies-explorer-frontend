@@ -12,6 +12,7 @@
 }
 
 .profile__input {
+   position: relative;
    width: 70%;
    margin: 0;
    border: 0;
@@ -21,6 +22,14 @@
    line-height: 13px;
    padding-bottom: 16px;
    outline: none;
+}
+
+.error__profile {
+   margin-top: 10px;
+}
+
+.error__profile_margin {
+   margin-top: 25px;
 }
 
 .profile__input::placeholder {
@@ -68,6 +77,10 @@
 
 .profile__button:hover {
    opacity: 0.8;
+}
+
+.profile__button:disabled {
+   color: gray;
 }
 
 .profile__link {

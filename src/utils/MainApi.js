@@ -60,7 +60,6 @@ class Api {
    }
 
    addSavedMovies(data) {
-      debugger
       return fetch(`${this._address}/movies`, {
          method: "POST",
          headers: {
@@ -74,12 +73,23 @@ class Api {
             year: data.year,
             description: data.description,
             image: `https://api.nomoreparties.co/${data.image.url}`,
-            trailerLink: data.trailerLink,
+            trailerLink:
+               data.trailerLink ||
+               "https://www.youtube.com/watch?v=C5WTGOdOek0&ab_channel=%D0%9B%D1%8E%D0%B4%D0%BC%D0%B8%D0%BB%D0%B0%D0%9D%D0%B0%D1%80%D1%8B%D0%B6%D0%BD%D0%B0%D1%8F",
             thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
             movieId: data.id,
             nameRU: data.nameRU,
-            nameEN: data.nameEN,
+            nameEN: data.nameEN || 'Отсутствует',
          }),
+      }).then(this._handleResponse);
+   }
+
+   deleteMovie(movieId) {
+      return fetch(`${this._address}/movies/${movieId}`, {
+         method: "DELETE",
+         headers: {
+            authorization: `Bearer ${localStorage.getItem("jwt")}`,
+         },
       }).then(this._handleResponse);
    }
 }

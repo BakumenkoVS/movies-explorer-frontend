@@ -20,6 +20,7 @@ export default function Movies({
    addNewMovie,
    loading,
    error,
+   deleteMovie,
 }) {
    const [count, setCount] = useState(
       JSON.parse(localStorage.getItem("count")) || 0
@@ -54,10 +55,10 @@ export default function Movies({
                   key={`movie${movie.id}`}
                   moviesSaved={moviesSaved}
                   addNewMovie={addNewMovie}
+                  deleteMovie={deleteMovie}
                />
             ))
             .slice(0, count);
-         console.log(count);
       }
    };
 
