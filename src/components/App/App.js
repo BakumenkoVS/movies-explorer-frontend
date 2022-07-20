@@ -90,9 +90,21 @@ export default function App() {
    const handleUpdateUser = (name, email) => {
       api.addUserInfo(name, email)
          .then((res) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Данные успешно обновлены!",
+               class: "success",
+            });
             setCurrentUser(res);
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка!",
+               class: "error",
+            });
+            console.log(err);
+         });
    };
 
    //Handler login получает password и email отлает jwt токен
@@ -102,12 +114,22 @@ export default function App() {
          .signIn(password, email)
          .then((data) => {
             if (data.token) {
+               setInfoTooltip(true);
+               setInfoTooltipInfo({
+                  text: "Добро пожаловать!",
+                  class: "success",
+               });
                localStorage.setItem("jwt", data.token);
                setLoggedIn(true);
                history("/movies");
             }
          })
          .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка авторизации!",
+               class: "error",
+            });
             console.log(err);
          });
    }
@@ -199,8 +221,7 @@ export default function App() {
    const foundFilms = (inputInfo) => {
       setLoading(true);
       const newFilterMovies = filterMovies(movies, inputInfo, shortcut);
-      console.log(1);
-      console.log(newFilterMovies);
+
       setSearchMovies(newFilterMovies);
       localStorage.setItem("foundFilms", JSON.stringify(newFilterMovies));
       localStorage.setItem("inputInfo", JSON.stringify(inputInfo));

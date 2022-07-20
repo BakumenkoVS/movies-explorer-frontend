@@ -35,7 +35,7 @@ class Api {
          method: "GET",
          headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${this._token}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
          },
       }).then(this._handleResponse);
    };

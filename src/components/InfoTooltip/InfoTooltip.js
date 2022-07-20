@@ -9,7 +9,7 @@ export default function InfoTooltip({ onClose, props, isOpen }) {
                : `popup popup_type_info`
          }
       >
-         <div className="popup__overlay" onClick={onClose} />
+         <div className="popup__overlay_ifo" onClick={onClose} />
          <div className="popup__container">
             <div
                className={`popup__info_icon popup__info_icon-${props?.class}`}
