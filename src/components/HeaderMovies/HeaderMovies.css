@@ -1,0 +1,13 @@
+.heder__nav-logo {
+   transition: opacity linear 0.5s;
+}
+
+.heder__nav-logo:hover {
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 1280px) {
+   .heder__nav-logo {
+      display: none;
+   }
+}

@@ -1,0 +1,152 @@
+.popup__overlay {
+   display: none;
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.3);
+   z-index: 1;
+}
+
+.menu {
+   display: block;
+   max-width: 540px;
+   width: 100%;
+   max-height: 100vh;
+   position: absolute;
+   z-index: 2;
+   background-color: white;
+   opacity: 1;
+   top: 0;
+   bottom: 0;
+   right: 0;
+}
+
+.open {
+   display: block;
+}
+
+.menu__close-button {
+   position: absolute;
+   top: 13.44px;
+   right: 13.44px;
+   background-color: white;
+   border: 0;
+   width: 23px;
+   height: 23px;
+   padding: 0;
+   cursor: pointer;
+   transition: opacity linear 0.5s;
+}
+
+.menu__close-button:hover {
+   opacity: 0.8;
+}
+
+.menu__close-button_img {
+   width: 22px;
+   height: 22px;
+}
+
+.menu__links {
+   display: flex;
+   flex-direction: column;
+   margin-top: 144px;
+}
+
+.menu__link {
+   text-decoration: none;
+   color: black;
+   text-align: center;
+   padding-bottom: 7px;
+   margin: 0 auto 15px;
+   font-weight: 500;
+   font-size: 18px;
+   line-height: 22px;
+   transition: opacity linear 0.5s;
+   cursor: pointer;
+}
+
+.menu__link:hover {
+   opacity: 0.7;
+}
+
+.active {
+   border-bottom: 2px solid black;
+}
+
+.menu__profile-link {
+   background: #f9f9f9;
+   border-radius: 20px;
+   padding: 8px 20px;
+   margin: 444px auto 32px;
+   color: #000;
+   border-radius: 20px;
+   text-decoration: none;
+   cursor: pointer;
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 16px;
+   transition: opacity linear 0.5s;
+}
+
+.menu__profile-link:hover {
+   opacity: 0.8;
+}
+
+@media screen and (min-width: 1280px) {
+   .popup__overlay {
+      display: block;
+      position: relative;
+      background-color: white;
+   }
+
+   .menu {
+      display: block;
+      width: 1100px;
+      position: relative;
+      z-index: 2;
+   }
+
+   .menu__close-button {
+      display: none;
+   }
+
+   .menu__links {
+      box-sizing: border-box;
+      flex-direction: row;
+      margin: 28px 0;
+      text-align: center;
+   }
+
+   .menu__link {
+      font-weight: 400;
+      margin: 0 16px 0 428px;
+      font-size: 13px;
+      line-height: 18px;
+      width: 100%;
+      white-space: nowrap;
+      padding: 0;
+   }
+
+   .menu__link:first-child {
+      display: none;
+   }
+
+   .menu__link_margin {
+      margin: 0;
+   }
+
+   .menu__profile-link {
+      margin: 0;
+      margin-left: 364px;
+   }
+
+   .active {
+      border: 0;
+      font-weight: 500;
+   }
+}

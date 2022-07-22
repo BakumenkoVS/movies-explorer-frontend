@@ -1,0 +1,29 @@
+.login {
+   box-sizing: border-box;
+   padding: 38px 30px 30px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   width: 100%;
+}
+
+.inputForm__submit-button_login {
+   margin-top: 285px;
+}
+
+@media screen and (min-width: 768px) {
+   .login {
+      padding: 224px 186px 232px;
+      align-items: flex-start;
+   }
+
+   .inputForm__submit-button_login {
+      margin-top: 221px;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   .login {
+      padding: 52px 442px 70px;
+   }
+}

@@ -1,0 +1,130 @@
+.register {
+   box-sizing: border-box;
+   padding: 38px 30px 30px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   width: 100%;
+}
+
+.inputForm {
+   width: 100%;
+}
+
+.signTitle {
+   font-weight: 500;
+   font-size: 24px;
+   line-height: 29px;
+   margin: 0;
+   padding: 32px 0 80px;
+   text-align: center;
+}
+
+.input__title {
+   font-weight: 400;
+   font-size: 10px;
+   line-height: 12px;
+   color: #a0a0a0;
+   margin: 0;
+   padding-bottom: 5px;
+}
+
+.inputForm__input {
+   width: 100%;
+   border: 0;
+   border-bottom: 1px solid #e8e8e8;
+   padding-bottom: 10px;
+   margin-bottom: 24px;
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 17px;
+   color: #000000;
+   outline: none;
+}
+
+.inputForm__input:focus {
+   border-color: #000000;
+}
+
+.error {
+   font-weight: 400;
+   font-size: 10px;
+   line-height: 12px;
+   color: #ff4062;
+   display: block;
+   padding: 6px 0 6px;
+   display: none;
+}
+
+.inputForm__submit-button {
+   width: 100%;
+   background-color: #000000;
+   color: white;
+   border: 0;
+   min-height: 45px;
+   margin: 216px 0 0;
+   padding: 0;
+   cursor: pointer;
+   transition: opacity linear 0.5s;
+}
+
+.inputForm__submit-button:hover {
+   opacity: 0.8;
+}
+
+.input__subtitle {
+   font-weight: 400;
+   font-size: 12px;
+   line-height: 15px;
+   text-align: center;
+   color: #a0a0a0;
+   margin: 0;
+   padding-top: 14px;
+}
+
+.input__link {
+   text-decoration: none;
+   color: #000;
+   padding-left: 7px;
+   cursor: pointer;
+   transition: opacity linear 0.5s;
+}
+
+.input__link:hover {
+   opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+   .register {
+      padding: 224px 186px 232px;
+      align-items: flex-start;
+   }
+
+   .signTitle {
+      padding: 22px 0 40px;
+   }
+
+   .inputForm__input:focus {
+      border-color: #000000;
+   }
+
+   .inputForm__submit-button {
+      margin: 146px 0 0;
+   }
+
+   .input__subtitle {
+      font-size: 14px;
+      line-height: 17px;
+      padding-top: 16px;
+   }
+
+   .input__link {
+      padding-left: 6px;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+   .register {
+      padding: 52px 442px 70px;
+   }
+}
