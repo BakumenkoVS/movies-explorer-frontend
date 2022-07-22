@@ -51,6 +51,7 @@
    font-size: 11px;
    line-height: 13px;
    text-align: right;
+   z-index: -1;
 }
 
 .profile__name_email {
@@ -59,7 +60,7 @@
 }
 
 .profile__container {
-   z-index: -1;
+   z-index: 0;
    display: flex;
 }
 
