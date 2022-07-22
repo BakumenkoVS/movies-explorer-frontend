@@ -22,6 +22,7 @@
    line-height: 13px;
    padding-bottom: 16px;
    outline: none;
+   z-index: 0;
 }
 
 .error__profile {
@@ -58,6 +59,7 @@
 }
 
 .profile__container {
+   z-index: -1;
    display: flex;
 }
 

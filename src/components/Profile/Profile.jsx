@@ -23,12 +23,29 @@ export default function Profile({
    const [formValid, setFormValid] = useState(false);
 
    useEffect(() => {
+      if (currentUser) {
+         setName(currentUser?.name);
+         setEmail(currentUser?.email);
+      }
+   }, [currentUser]);
+
+   useEffect(() => {
       if (nameError || emailError) {
          setFormValid(false);
+         if (currentUser.name !== name && currentUser.email === email) {
+            setFormValid(true);
+         }
+         if (currentUser.name === name && currentUser.email !== email) {
+            setFormValid(true);
+         }
       } else {
-         setFormValid(true);
+         if (currentUser.name === name && currentUser.email === email) {
+            setFormValid(false);
+         } else {
+            setFormValid(true);
+         }
       }
-   }, [nameError, emailError]);
+   }, [nameError, emailError, name, email]);
 
    const handlerBlur = (e) => {
       switch (e.target.name) {
@@ -86,7 +103,7 @@ export default function Profile({
          />
 
          <div className="profile">
-            <h2 className="signTitle">Привет, {currentUser?.name}!</h2>
+            <h2 className="signTitle">Привет, {name}!</h2>
             <form className="profileForm" onSubmit={handleSubmit}>
                <div className="profile__container">
                   <input
@@ -96,7 +113,6 @@ export default function Profile({
                      maxLength="40"
                      name="name"
                      type="name"
-                     placeholder="Имя"
                      value={name}
                      onChange={handleChangeName}
                      onBlur={(e) => handlerBlur(e)}
@@ -104,7 +120,7 @@ export default function Profile({
                   {nameDirty && nameError && (
                      <span className="error error__profile">{nameError}</span>
                   )}
-                  <p className="profile__name">{currentUser?.name}</p>
+                  <p className="profile__name">{name}</p>
                </div>
                <div className="profile__container">
                   <input
@@ -114,7 +130,6 @@ export default function Profile({
                      maxLength="40"
                      name="email"
                      type="email"
-                     placeholder="E-mail"
                      value={email}
                      onChange={handleChangeEmail}
                      onBlur={(e) => handlerBlur(e)}
@@ -124,9 +139,7 @@ export default function Profile({
                         {emailError}
                      </span>
                   )}
-                  <p className="profile__name profile__name_email">
-                     {currentUser?.email}
-                  </p>
+                  <p className="profile__name profile__name_email">{email}</p>
                </div>
 
                <button
@@ -137,7 +150,7 @@ export default function Profile({
                   Редактировать
                </button>
 
-               <Link className="profile__link" to="/signup" onClick={signOut}>
+               <Link className="profile__link" to="/" onClick={signOut}>
                   Выйти из аккаунта
                </Link>
             </form>

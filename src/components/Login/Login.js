@@ -81,7 +81,9 @@ export default function Login({ handleLogin }) {
 
    return (
       <div className="login">
-         <img src={logo} className="logo" alt="Логотип" />
+         <Link to='/'>
+            <img src={logo} className="logo" alt="Логотип" />
+         </Link>
          <h2 className="signTitle">Рады видеть!</h2>
          <form className="inputForm" onSubmit={handleSubmit}>
             <p className="input__title">E-mail</p>

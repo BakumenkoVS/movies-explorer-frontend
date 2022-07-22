@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./More.css";
 export default function More({ onClick, onMoviesSlice, onMovies }) {
-   const [full, setFull] = useState(false);
+   const [full, setFull] = useState(true);
 
    useEffect(() => {
       if (onMovies) {

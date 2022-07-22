@@ -13,6 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import BlockRoute from "../BlockRote/BlockRote";
 
 export default function App() {
    //States
@@ -23,7 +24,7 @@ export default function App() {
    const [moviesSaved, setMoviesSaved] = useState(null);
    const [shortcut, setShortcut] = useState(false);
    const [shortcutSave, setShortcutSave] = useState(false);
-   const [searchMovies, setSearchMovies] = useState([]);
+   const [searchMovies, setSearchMovies] = useState(null);
    const [searchSavedMovies, setSearchSavedMovies] = useState(null);
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState("");
@@ -37,12 +38,12 @@ export default function App() {
       tokenCheck();
    }, []);
 
-   //При изменении state login переадресует на страницу movies
-   useEffect(() => {
-      if (loggedIn) {
-         history("/movies");
-      }
-   }, [loggedIn]);
+   // //При изменении state login переадресует на страницу movies
+   // useEffect(() => {
+   //    if (loggedIn) {
+   //       history("/movies");
+   //    }
+   // }, [loggedIn]);
 
    useEffect(() => {
       setShortcut(JSON.parse(localStorage.getItem("shortcut")));
@@ -67,13 +68,12 @@ export default function App() {
       return api
          .signUp(password, email, name)
          .then((res) => {
-            debugger;
+            handleLogin(password, email);
             setInfoTooltip(true);
             setInfoTooltipInfo({
                text: "Вы успешно зарегистрировались!",
                class: "success",
             });
-            history("/signin");
          })
          .catch((err) => {
             setInfoTooltip(true);
@@ -107,39 +107,13 @@ export default function App() {
          });
    };
 
-   //Handler login получает password и email отлает jwt токен
-   function handleLogin(password, email) {
-      return api
-
-         .signIn(password, email)
-         .then((data) => {
-            if (data.token) {
-               setInfoTooltip(true);
-               setInfoTooltipInfo({
-                  text: "Добро пожаловать!",
-                  class: "success",
-               });
-               localStorage.setItem("jwt", data.token);
-               setLoggedIn(true);
-               history("/movies");
-            }
-         })
-         .catch((err) => {
-            setInfoTooltip(true);
-            setInfoTooltipInfo({
-               text: "Возникла ошибка авторизации!",
-               class: "error",
-            });
-            console.log(err);
-         });
-   }
-
    const handleCloseInfoTooltip = () => {
       setInfoTooltip(false);
    };
 
    //Функция выхода из профиля
    function signOut() {
+      debugger;
       localStorage.clear();
       setLoggedIn(false);
       setIsMenuOpen(false);
@@ -157,6 +131,7 @@ export default function App() {
       if (loading) {
          api.getContent()
             .then((user) => {
+               debugger;
                setCurrentUser(user.data);
             })
             .catch((err) => {
@@ -171,6 +146,7 @@ export default function App() {
    useEffect(() => {
       setLoading(true);
       if (loggedIn) {
+         debugger;
          Promise.all([moviesApi.getMovies(), api.getSavedMovies()])
             .then(([movies, moviesSaved]) => {
                setMovies(movies);
@@ -203,6 +179,33 @@ export default function App() {
       }
    }
 
+   //Handler login получает password и email отлает jwt токен
+   function handleLogin(password, email) {
+      return api
+
+         .signIn(password, email)
+         .then((data) => {
+            if (data.token) {
+               localStorage.setItem("jwt", data.token);
+               setLoggedIn(true);
+               history("/movies");
+               setInfoTooltip(true);
+               setInfoTooltipInfo({
+                  text: "Добро пожаловать!",
+                  class: "success",
+               });
+               history("/movies");
+            }
+         })
+         .catch((err) => {
+            setInfoTooltip(true);
+            setInfoTooltipInfo({
+               text: "Возникла ошибка авторизации!",
+               class: "error",
+            });
+            console.log(err);
+         });
+   }
    //Функция фильтрует исходный массив фильмов
    //по продолжительности и ключевому набору букв
 
@@ -356,11 +359,22 @@ export default function App() {
                />
                <Route
                   path="/signup"
-                  element={<Register handleRegister={handleRegister} />}
+                  element={
+                     <BlockRoute>
+                        <Register
+                           handleRegister={handleRegister}
+                           loggedIn={loggedIn}
+                        />
+                     </BlockRoute>
+                  }
                />
                <Route
                   path="/signin"
-                  element={<Login handleLogin={handleLogin} />}
+                  element={
+                     <BlockRoute>
+                        <Login handleLogin={handleLogin} loggedIn={loggedIn} />
+                     </BlockRoute>
+                  }
                />
                <Route
                   path="/profile"

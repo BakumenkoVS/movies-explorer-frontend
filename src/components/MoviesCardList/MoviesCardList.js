@@ -3,8 +3,10 @@ import "./MoviesCardList.css";
 
 export default function MoviesCardList({ onMovies, error }) {
    const renderList = () => {
+
       if (error || onMovies) {
          if (error) {
+            debugger
             return (
                <p className="MoviesCardList__message">
                   Во время запроса произошла ошибка. Возможно, проблема с
