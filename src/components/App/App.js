@@ -38,13 +38,6 @@ export default function App() {
       tokenCheck();
    }, []);
 
-   // //При изменении state login переадресует на страницу movies
-   // useEffect(() => {
-   //    if (loggedIn) {
-   //       history("/movies");
-   //    }
-   // }, [loggedIn]);
-
    useEffect(() => {
       setShortcut(JSON.parse(localStorage.getItem("shortcut")));
       setSearchMovies(JSON.parse(localStorage.getItem("foundFilms")));
@@ -113,7 +106,6 @@ export default function App() {
 
    //Функция выхода из профиля
    function signOut() {
-      debugger;
       localStorage.clear();
       setLoggedIn(false);
       setIsMenuOpen(false);
@@ -131,7 +123,6 @@ export default function App() {
       if (loading) {
          api.getContent()
             .then((user) => {
-               debugger;
                setCurrentUser(user.data);
             })
             .catch((err) => {
@@ -146,7 +137,6 @@ export default function App() {
    useEffect(() => {
       setLoading(true);
       if (loggedIn) {
-         debugger;
          Promise.all([moviesApi.getMovies(), api.getSavedMovies()])
             .then(([movies, moviesSaved]) => {
                setMovies(movies);

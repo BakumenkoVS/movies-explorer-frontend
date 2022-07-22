@@ -25,7 +25,7 @@
    width: 16px;
    height: 16px;
    border-radius: 50%;
-   background-color: #2BE080;
+   background-color: #2be080;
    top: 2px;
    left: 2px;
    transition: all 0.4s ease;
@@ -68,5 +68,3 @@
       font-size: 13px;
    }
 }
-
-
