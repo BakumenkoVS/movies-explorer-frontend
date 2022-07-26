@@ -17,7 +17,7 @@
    width: 100%;
    max-height: 100vh;
    position: absolute;
-   z-index: 2;
+   z-index: 1;
    background-color: white;
    opacity: 1;
    top: 0;
@@ -91,6 +91,7 @@
    font-size: 14px;
    line-height: 16px;
    transition: opacity linear 0.5s;
+   z-index: 0;
 }
 
 .menu__profile-link:hover {
@@ -102,13 +103,22 @@
       display: block;
       position: relative;
       background-color: white;
+      z-index: 0;
+   }
+
+   .popup__overlay_pink {
+      background-color: #f3c1f8;
    }
 
    .menu {
       display: block;
       width: 1100px;
       position: relative;
-      z-index: 2;
+      z-index: 0;
+   }
+
+   .menu_pink {
+      background-color: #f3c1f8;
    }
 
    .menu__close-button {

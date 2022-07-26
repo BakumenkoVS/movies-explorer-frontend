@@ -1,8 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./NotFound.css";
-export default function NotFound() {
-   const history = useNavigate();
+
+export default function NotFound({ history }) {
    const goBack = () => history(-1);
    return (
       <div className="notFound">

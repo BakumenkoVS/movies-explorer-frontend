@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./More.css";
-export default function More() {
+export default function More({ onClick, onMoviesSlice, onMovies }) {
+   const [full, setFull] = useState(true);
+
+   useEffect(() => {
+      if (onMovies) {
+         if (onMovies.length === onMoviesSlice.length) {
+            setFull(true);
+         } else {
+            setFull(false);
+         }
+      }
+   }, [onMoviesSlice]);
+
+   const MoreClassName = `${full ? "more__disable" : "more"}`;
+
    return (
-      <div className="more">
-         <button className="more__button">Ещё</button>
+      <div className={MoreClassName}>
+         <button className="more__button" onClick={onClick}>
+            Ещё
+         </button>
       </div>
    );
 }
