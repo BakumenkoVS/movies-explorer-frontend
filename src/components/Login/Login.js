@@ -3,20 +3,6 @@ import "./Login.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 export default function Login({ handleLogin }) {
-   // const [data, setData] = useState({
-   //    email: "",
-   //    password: "",
-   // });
-   // const { email, password } = data;
-
-   // function handleChange(e) {
-   //    const { name, value } = e.target;
-   //    setData({
-   //       ...data,
-   //       [name]: value,
-   //    });
-   // }
-
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [emailDirty, setEmailDirty] = useState(false);
@@ -81,7 +67,7 @@ export default function Login({ handleLogin }) {
 
    return (
       <div className="login">
-         <Link to='/'>
+         <Link to="/">
             <img src={logo} className="logo" alt="Логотип" />
          </Link>
          <h2 className="signTitle">Рады видеть!</h2>
@@ -89,7 +75,7 @@ export default function Login({ handleLogin }) {
             <p className="input__title">E-mail</p>
             <input
                className="inputForm__input"
-               required
+               requiredww
                minLength="2"
                maxLength="40"
                name="email"
